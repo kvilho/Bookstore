@@ -1,5 +1,9 @@
 package hh.sof3013.bookstore;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +15,7 @@ import hh.sof3013.bookstore.domain.BookRepository;
 @SpringBootApplication
 public class BookstoreApplication {
 
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
@@ -22,6 +27,10 @@ public class BookstoreApplication {
 			Book book2 = new Book("Sinuhe Egyptiläinen", "Mika Waltari", 1945, "123456798", 25.95);
 			repository.save(book1);
 			repository.save(book2);
+
+			for (Book book : repository.findAll()) {
+				log.info(book.toString());
+			}
 		};
 	}
 
