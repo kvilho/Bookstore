@@ -41,7 +41,11 @@ public class BookController {
     }
     
     @PostMapping("/savebook")
-    public String saveBook(@ModelAttribute Book book) {
+    public String saveBook(Book book) {
+
+        System.out.println("id " + book.getId());
+        System.out.println("title " + book.getTitle());
+        
         repository.save(book);
         
         return "redirect:/booklist";
@@ -51,6 +55,12 @@ public class BookController {
     public String deleteBook(@PathVariable Long id, Model model) {
         repository.deleteById(id);
         return "redirect:/booklist";
+    }
+    
+    @GetMapping("/editbook/{id}")
+    public String getMethodName(@PathVariable Long id, Model model) {
+        model.addAttribute("book", repository.findById(id));
+        return "editbook";
     }
     
     
